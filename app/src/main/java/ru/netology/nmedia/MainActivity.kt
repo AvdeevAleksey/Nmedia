@@ -16,9 +16,9 @@ class MainActivity : AppCompatActivity() {
                 author = "Нетология. Университет интернет-профессий",
                 published = "21 мая в 18:36",
                 content = "Привет, это новая Нетология! Когда-то Нетология начиналась с интенсивов по онлайн-маркетингу. Затем появились курсы по дизайну, разработке, аналитике и управлению. Мы растем сами и помогаем расти студентам: от новичков до уверенных профессионалов. Но самое важное остаётся с нами: мы верим, что в каждом уже есть сила, которая заставляет хотеть больше, целиться выше, бежать быстрее. Наша миссия - помочь встать на путь роста и начать цепочку перемен http://netolo.gy/fyb",
-                likes = 999,
-                reposts = 999,
-                views = 1099,
+                likes = 999999,
+                reposts = 1099,
+                views = 9999,
                 likedByMe = false
         )
         with(binding) {
@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
 
             likeImageView?.setOnClickListener {
                 post.likedByMe = !post.likedByMe
-                likeTextView.text = if (post.likedByMe) countMyClick(post.likes+1) else countMyClick(post.likes-1)
+                likeTextView.text = if (post.likedByMe) countMyClick(post.likes+1) else countMyClick(post.likes)
                 likeImageView.setImageResource(
                         if (post.likedByMe) {
                             R.drawable.ic_liked_favorite_24
@@ -43,33 +43,31 @@ class MainActivity : AppCompatActivity() {
                 )
             }
 
-            var rePostCount:Int = post.reposts
-            var viewsCount:Int = post.views
-
             repostsImageView?.setOnClickListener {
-                repostsTextView.text = countMyClick(++rePostCount)
+                repostsTextView.text = countMyClick(post.copy(reposts = post.reposts+1).reposts)
             }
 
             viewsImageView?.setOnClickListener {
-                viewsTextView.text = countMyClick(++viewsCount)
+                viewsTextView.text = countMyClick(post.copy(views = post.views+1).views)
             }
         }
     }
 
-    fun dischargesReduction(click: Int, thousand: Int = 1000): String {
+    fun dischargesReduction(click: Int, t: Int = 1000): String {
         return when (click) {
-            in thousand until thousand*thousand -> "k"
+            in t until t*t -> "k"
             else -> "M"
         }
     }
 
-    fun countMyClick(click:Int, thousand:Int = 1000): String {
+    fun countMyClick(click:Int, t:Int = 1000): String {
         return when (click) {
-            in 1 until thousand -> click.toString()
-            in thousand until thousand+99 -> "1${dischargesReduction(click)}"
-            in thousand until thousand*10 -> "${click/thousand%10},${(click/thousand-click/thousand%10)*10}${dischargesReduction(click)}"
-            in thousand*10 until thousand*thousand -> "${click/thousand%10}${dischargesReduction(click)}"
-            else -> click.toString()
+            in 1 until t -> click.toString()
+            in click/t%10*t until click/t%10*t+100 -> "${click/t%10}${dischargesReduction(click)}"
+            in click/t%10*t+100 until click/t%10*t+t -> "${click/t%10},${click/100-click/t%10*10}${dischargesReduction(click)}"
+            in click/t%10*t until click/t%100*t+t -> "${click/t%100}${dischargesReduction(click)}"
+            in click/t%100*t until click/t%1000*t+t -> "${click/t%1000}${dischargesReduction(click)}"
+            else -> "${click/(t*t)}${dischargesReduction(click)}"
         }
     }
 }
