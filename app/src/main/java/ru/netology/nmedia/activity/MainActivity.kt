@@ -1,7 +1,9 @@
-package ru.netology.nmedia
+package ru.netology.nmedia.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import ru.netology.nmedia.dto.Post
+import ru.netology.nmedia.R
 import ru.netology.nmedia.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -33,7 +35,7 @@ class MainActivity : AppCompatActivity() {
 
             likeImageView?.setOnClickListener {
                 post.likedByMe = !post.likedByMe
-                likeTextView.text = if (post.likedByMe) countMyClick(post.likes+1) else countMyClick(post.likes)
+                likeTextView.text = if (post.likedByMe) countMyClick(post.copy(likes = post.likes+1).likes) else countMyClick(post.copy(likes = post.likes).likes)
                 likeImageView.setImageResource(
                         if (post.likedByMe) {
                             R.drawable.ic_liked_favorite_24
