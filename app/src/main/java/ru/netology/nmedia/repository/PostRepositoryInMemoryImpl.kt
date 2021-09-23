@@ -7,7 +7,7 @@ import ru.netology.nmedia.dto.Post
 
 class PostRepositoryInMemoryImpl : PostRepository {
 
-    private var post = Post(
+    private var posts = Post(
         id = 1,
         author = "Нетология. Университет интернет-профессий",
         published = "21 мая в 18:36",
@@ -18,22 +18,22 @@ class PostRepositoryInMemoryImpl : PostRepository {
         likedByMe = false
     )
 
-    private val data = MutableLiveData(post)
+    private val data = MutableLiveData(posts)
 
     override fun get(): LiveData<Post> = data
 
     override fun like() {
-        post = post.copy(likedByMe = !post.likedByMe,likesCount = if (!post.likedByMe) post.likesCount+1 else post.likesCount-1)
-        data.value = post
+        posts = posts.copy(likedByMe = !posts.likedByMe,likesCount = if (!posts.likedByMe) posts.likesCount+1 else posts.likesCount-1)
+        data.value = posts
     }
 
     override fun repost() {
-        post = post.copy(repostsCount = post.repostsCount+1)
-        data.value = post
+        posts = posts.copy(repostsCount = posts.repostsCount+1)
+        data.value = posts
     }
 
     override fun view() {
-        post = post.copy(viewsCount = post.viewsCount+1)
-        data.value = post
+        posts = posts.copy(viewsCount = posts.viewsCount+1)
+        data.value = posts
     }
 }
