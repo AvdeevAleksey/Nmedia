@@ -84,6 +84,7 @@ fun countMyClick(click:Int, t:Int = 1000): String {
         in click/t%10*t+100 until click/t%10*t+t -> "${click/t%10},${click/100-click/t%10*10}${dischargesReduction(click)}"
         in click/t%10*t until click/t%100*t+t -> "${click/t%100}${dischargesReduction(click)}"
         in click/t%100*t until click/t%1000*t+t -> "${click/t%1000}${dischargesReduction(click)}"
+        in click/(t*t)%10*(t*t)+t*100 until click/(t*t)%10*(t*t)+(t*t) -> "${click/(t*t)%10},${click/(t*100)-click/(t*t)%10*10}${dischargesReduction(click)}"
         else -> "${click/(t*t)}${dischargesReduction(click)}"
     }
 }

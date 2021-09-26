@@ -12,7 +12,7 @@ class PostRepositoryInMemoryImpl : PostRepository {
             author = "Нетология. Университет интернет-профессий",
             published = "21 мая в 18:36",
             content = "Привет, это новая Нетология! Когда-то Нетология начиналась с интенсивов по онлайн-маркетингу. Затем появились курсы по дизайну, разработке, аналитике и управлению. Мы растем сами и помогаем расти студентам: от новичков до уверенных профессионалов. Но самое важное остаётся с нами: мы верим, что в каждом уже есть сила, которая заставляет хотеть больше, целиться выше, бежать быстрее. Наша миссия - помочь встать на путь роста и начать цепочку перемен http://netolo.gy/fyb",
-            likesCount = 999,
+            likesCount = 2099999,
             repostsCount = 1099,
             viewsCount = 999999,
             likedByMe = false),
@@ -20,7 +20,7 @@ class PostRepositoryInMemoryImpl : PostRepository {
             author = "Нетология. Университет интернет-профессий",
             published = "22 мая в 18:36",
             content = "Привет, это новая Нетология! Когда-то Нетология начиналась с интенсивов по онлайн-маркетингу. Затем появились курсы по дизайну, разработке, аналитике и управлению. Мы растем сами и помогаем расти студентам: от новичков до уверенных профессионалов. Но самое важное остаётся с нами: мы верим, что в каждом уже есть сила, которая заставляет хотеть больше, целиться выше, бежать быстрее. Наша миссия - помочь встать на путь роста и начать цепочку перемен http://netolo.gy/fyb",
-            likesCount = 1099999,
+            likesCount = 999,
             repostsCount = 9999999,
             viewsCount = 999999,
             likedByMe = false),
@@ -29,7 +29,7 @@ class PostRepositoryInMemoryImpl : PostRepository {
             published = "23 мая в 18:36",
             content = "Привет, это новая Нетология! Когда-то Нетология начиналась с интенсивов по онлайн-маркетингу. Затем появились курсы по дизайну, разработке, аналитике и управлению. Мы растем сами и помогаем расти студентам: от новичков до уверенных профессионалов. Но самое важное остаётся с нами: мы верим, что в каждом уже есть сила, которая заставляет хотеть больше, целиться выше, бежать быстрее. Наша миссия - помочь встать на путь роста и начать цепочку перемен http://netolo.gy/fyb",
             likesCount = 2999,
-            repostsCount = 21099,
+            repostsCount = 21999,
             viewsCount = 2999999,
             likedByMe = false))
 
@@ -38,17 +38,20 @@ class PostRepositoryInMemoryImpl : PostRepository {
     override fun get(): LiveData<MutableList<Post>> = data
 
     override fun likeById(id: Int) {
-        posts[id] = posts[id].copy(likedByMe = !posts[id].likedByMe,likesCount = if (!posts[id].likedByMe) posts[id].likesCount+1 else posts[id].likesCount-1)
+        val nid: Int = id - 1
+        posts[nid] = posts[nid].copy(likedByMe = !posts[nid].likedByMe,likesCount = if (!posts[nid].likedByMe) posts[nid].likesCount+1 else posts[nid].likesCount-1)
         data.value = posts
     }
 
     override fun repostById(id: Int) {
-        posts[id] = posts[id].copy(repostsCount = posts[id].repostsCount+1)
+        val nid: Int = id - 1
+        posts[nid] = posts[nid].copy(repostsCount = posts[nid].repostsCount+1)
         data.value = posts
     }
 
     override fun viewingById(id: Int) {
-        posts[id] = posts[id].copy(viewsCount = posts[id].viewsCount+1)
+        val nid: Int = id - 1
+        posts[nid] = posts[nid].copy(viewsCount = posts[nid].viewsCount+1)
         data.value = posts
     }
 }
