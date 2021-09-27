@@ -38,20 +38,23 @@ class PostRepositoryInMemoryImpl : PostRepository {
     override fun get(): LiveData<MutableList<Post>> = data
 
     override fun likeById(id: Int) {
-        val nid: Int = id - 1
-        posts[nid] = posts[nid].copy(likedByMe = !posts[nid].likedByMe,likesCount = if (!posts[nid].likedByMe) posts[nid].likesCount+1 else posts[nid].likesCount-1)
+        val index = posts.indexOf(posts.first{it.id == id})
+        posts[index] = posts[index].copy(
+            likedByMe = !posts[index].likedByMe,
+            likesCount = if (!posts[index].likedByMe) posts[index].likesCount+1 else posts[index].likesCount-1
+        )
         data.value = posts
     }
 
     override fun repostById(id: Int) {
-        val nid: Int = id - 1
-        posts[nid] = posts[nid].copy(repostsCount = posts[nid].repostsCount+1)
+        val index = posts.indexOf(posts.first{it.id == id})
+        posts[index] = posts[index].copy(repostsCount = posts[index].repostsCount+1)
         data.value = posts
     }
 
     override fun viewingById(id: Int) {
-        val nid: Int = id - 1
-        posts[nid] = posts[nid].copy(viewsCount = posts[nid].viewsCount+1)
+        val index = posts.indexOf(posts.first{it.id == id})
+        posts[index] = posts[index].copy(viewsCount = posts[index].viewsCount+1)
         data.value = posts
     }
 }

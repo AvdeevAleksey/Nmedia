@@ -1,7 +1,5 @@
 package ru.netology.nmedia.adapter
 
-import android.os.Parcel
-import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ListAdapter
@@ -22,13 +20,12 @@ class PostsAdapter(
 ) : ListAdapter<Post, PostViewHolder>(PostDiffCallBack()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
-        val binding = CardPostBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = CardPostBinding.inflate(LayoutInflater.from(parent.context),parent,false)
         return PostViewHolder(binding, onLikeListener, onShareListener, onViewingListener)
     }
 
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
-        val post = getItem(position)
-        holder.bind(post)
+        holder.bind(getItem(position))
     }
 
 }

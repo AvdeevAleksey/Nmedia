@@ -3,7 +3,6 @@ package ru.netology.nmedia.activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
-import androidx.lifecycle.observe
 import ru.netology.nmedia.R
 import ru.netology.nmedia.adapter.PostsAdapter
 import ru.netology.nmedia.databinding.ActivityMainBinding
@@ -18,15 +17,15 @@ class MainActivity : AppCompatActivity() {
 
         val viewModel: PostViewModel by viewModels()
 
-        val adapter = PostsAdapter (
+        val postsAdapter = PostsAdapter (
             onLikeListener = {viewModel.likeById(it.id)},
             onShareListener = {viewModel.repostById(it.id)},
             onViewingListener = {viewModel.viewingById(it.id)}
         )
-        binding.rvPostRecyclerView.adapter = adapter
+        binding.rvPostRecyclerView.adapter = postsAdapter
 
         viewModel.data.observe(this) { posts ->
-            adapter.submitList(posts)
+            postsAdapter.submitList(posts)
         }
     }
 }
