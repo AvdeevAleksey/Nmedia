@@ -19,13 +19,7 @@ class PostsAdapter(
     private val onLikeListener: OnLikeListener,
     private val onShareListener: OnShareListener,
     private val onViewingListener: OnViewingListener
-) : RecyclerView.Adapter<PostViewHolder>() {
-
-    var postsList = emptyList<Post>()
-    set(value) {
-        field = value
-        notifyDataSetChanged()
-    }
+) : ListAdapter<Post, PostViewHolder>(PostDiffCallBack()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
         val binding = CardPostBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -33,11 +27,20 @@ class PostsAdapter(
     }
 
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
-        val post = postsList[position]
+        val post = getItem(position)
         holder.bind(post)
     }
 
-    override fun getItemCount(): Int = postsList.size
+}
+
+class PostDiffCallBack : DiffUtil.ItemCallback<Post>() {
+    override fun areItemsTheSame(oldItem: Post, newItem: Post): Boolean {
+        return oldItem.id == newItem.id
+    }
+
+    override fun areContentsTheSame(oldItem: Post, newItem: Post): Boolean {
+        return oldItem == newItem
+    }
 }
 
 class PostViewHolder(
@@ -69,6 +72,7 @@ class PostViewHolder(
         }
     }
 }
+
 
 fun dischargesReduction(click: Int, t: Int = 1000): String {
     return when (click) {
