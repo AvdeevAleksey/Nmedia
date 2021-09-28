@@ -2,6 +2,7 @@ package ru.netology.nmedia.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.PopupMenu
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -13,15 +14,21 @@ typealias OnLikeListener = (post: Post) -> Unit
 typealias OnShareListener = (post: Post) -> Unit
 typealias OnViewingListener = (post: Post) -> Unit
 
+interface OnInteractionListener {
+    fun onLike(post: Post)
+    fun onShare(post: Post)
+    fun onViewing(post: Post)
+    fun onPostEdit(post: Post)
+    fun onPostRemove(post: Post)
+}
+
 class PostsAdapter(
-    private val onLikeListener: OnLikeListener,
-    private val onShareListener: OnShareListener,
-    private val onViewingListener: OnViewingListener
+    private val onInteractionListener: OnInteractionListener
 ) : ListAdapter<Post, PostViewHolder>(PostDiffCallBack()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
         val binding = CardPostBinding.inflate(LayoutInflater.from(parent.context),parent,false)
-        return PostViewHolder(binding, onLikeListener, onShareListener, onViewingListener)
+        return PostViewHolder(binding, onInteractionListener)
     }
 
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
@@ -42,9 +49,7 @@ class PostDiffCallBack : DiffUtil.ItemCallback<Post>() {
 
 class PostViewHolder(
     private val binding: CardPostBinding,
-    private val onLikeListener: OnLikeListener,
-    private val onShareListener: OnShareListener,
-    private val onViewingListener: OnViewingListener
+    private val onInteractionListener: OnInteractionListener
 ) : RecyclerView.ViewHolder(binding.root)  {
     fun bind(post: Post) {
         binding.apply {
@@ -53,20 +58,36 @@ class PostViewHolder(
             contentTextView.text = post.content
             likeTextView.text = countMyClick(post.likesCount)
             repostsTextView.text = countMyClick(post.repostsCount)
-            viewsTextView.text = countMyClick(post.viewsCount)
+            viewsTextView.text = countMyClick(post.viewingCount)
             likeImageView.setImageResource(
                 if (post.likedByMe) R.drawable.ic_liked_favorite_24 else R.drawable.ic_baseline_favorite_border_24
             )
             likeImageView.setOnClickListener {
-                onLikeListener(post)
+                onInteractionListener.onLike(post)
             }
             repostsImageView.setOnClickListener {
-                onShareListener(post)
+                onInteractionListener.onShare(post)
             }
             viewsImageView.setOnClickListener {
-                onViewingListener(post)
+                onInteractionListener.onViewing(post)
+            }
+            postMenuImageView.setOnClickListener {
+                PopupMenu(it.context,it).apply {
+                    inflate(R.menu.options_post_menu)
+                    setOnMenuItemClickListener { item ->
+                        when(item.itemId) {
+                            R.id.postRemove -> {
+
+                            }
+                            else -> false
+                        }
+
+                    }
+                }.show()
             }
         }
+
+
     }
 }
 
