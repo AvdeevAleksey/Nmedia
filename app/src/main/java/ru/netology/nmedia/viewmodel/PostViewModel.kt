@@ -25,22 +25,26 @@ class PostViewModel : ViewModel() {
     fun likeById(id: Int) = repository.likeById(id)
     fun repostById(id: Int) = repository.repostById(id)
     fun viewingById(id: Int) = repository.viewingById(id)
+    fun removeById(id: Int) = repository.removeById(id)
     fun savePost() {
         edited.value?.let {
-            repository.saveById(it)
+            repository.savePost(it)
         }
+        edited.value = empty
     }
 
     fun editPost(post: Post) {
+
         edited.value = post
     }
 
     fun changeContent(content: String) {
-        val text = content.trim()
-        if (edited.value?.content == text) {
-            return
-        } else {
-            edited.value = edited.value?.copy(content = text)
+        edited.value?.let {
+            val text = content.trim()
+            if (it.content == text) {
+                return
+            }
+            edited.value = it.copy(content = text)
         }
     }
 }

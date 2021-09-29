@@ -10,10 +10,6 @@ import ru.netology.nmedia.R
 import ru.netology.nmedia.databinding.CardPostBinding
 import ru.netology.nmedia.dto.Post
 
-typealias OnLikeListener = (post: Post) -> Unit
-typealias OnShareListener = (post: Post) -> Unit
-typealias OnViewingListener = (post: Post) -> Unit
-
 interface OnInteractionListener {
     fun onLike(post: Post)
     fun onShare(post: Post)
@@ -77,7 +73,12 @@ class PostViewHolder(
                     setOnMenuItemClickListener { item ->
                         when(item.itemId) {
                             R.id.postRemove -> {
-
+                                onInteractionListener.onPostRemove(post)
+                                true
+                            }
+                            R.id.postEdit -> {
+                                onInteractionListener.onPostEdit(post)
+                                true
                             }
                             else -> false
                         }
@@ -86,8 +87,6 @@ class PostViewHolder(
                 }.show()
             }
         }
-
-
     }
 }
 
@@ -101,7 +100,7 @@ fun dischargesReduction(click: Int, t: Int = 1000): String {
 
 fun countMyClick(click:Int, t:Int = 1000): String {
     return when (click) {
-        in 1 until t -> click.toString()
+        in 0 until t -> click.toString()
         in click/t%10*t until click/t%10*t+100 -> "${click/t%10}${dischargesReduction(click)}"
         in click/t%10*t+100 until click/t%10*t+t -> "${click/t%10},${click/100-click/t%10*10}${dischargesReduction(click)}"
         in click/t%10*t until click/t%100*t+t -> "${click/t%100}${dischargesReduction(click)}"

@@ -3,6 +3,7 @@ package ru.netology.nmedia.repository
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import ru.netology.nmedia.dto.Post
+import java.util.*
 
 class PostRepositoryInMemoryImpl : PostRepository {
 
@@ -35,6 +36,23 @@ class PostRepositoryInMemoryImpl : PostRepository {
                                         likedByMe = false)
                                 ).reversed()
     )
+
+    override fun savePost(post: Post) {
+        val posts = data.value.orEmpty().toMutableList()
+        data.value = when(post.id) {
+            0 -> listOf(
+                post.copy(
+                    id = nId++,
+                    author = "Me",
+                    likedByMe = false,
+                    published = Calendar.getInstance().time.toString()
+                )
+            ) + posts
+            else -> posts.map {
+                if (it.id != post.id) it else it.copy(content = post.content)
+            }
+        }
+    }
 
     override fun get(): LiveData<List<Post>> = data
 
