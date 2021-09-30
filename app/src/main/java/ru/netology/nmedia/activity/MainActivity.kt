@@ -54,9 +54,9 @@ class MainActivity : AppCompatActivity() {
             if (post.id == 0) {
                 return@observe
             }
+            binding.cancelChangeImageButton.visibility = View.VISIBLE
             with(binding.content) {
                 requestFocus()
-                binding.cancelChangeImageButton.visibility = View.VISIBLE
                 setText(post.content)
             }
         }
