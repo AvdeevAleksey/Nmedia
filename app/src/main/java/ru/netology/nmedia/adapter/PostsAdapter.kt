@@ -41,6 +41,10 @@ class PostDiffCallBack : DiffUtil.ItemCallback<Post>() {
     override fun areContentsTheSame(oldItem: Post, newItem: Post): Boolean {
         return oldItem == newItem
     }
+
+    override fun getChangePayload(oldItem: Post, newItem: Post): Any? {
+        return super.getChangePayload(oldItem, newItem)
+    }
 }
 
 class PostViewHolder(
