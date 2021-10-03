@@ -2,6 +2,9 @@
     <string name="app_name">НМедиа</string>
     <string name="nmedia">НМедиа!</string>
     <string name="post_menu">Меню поста</string>
+    <string name="content_like">Лайк</string>
+    <string name="content_share">Поделиться</string>
+    <string name="content_views">Просмотры</string>
     <string name="post_text">Текст поста</string>
     <string name="text_not_be_empty">Пост не может быть пустым</string>
 </resources>

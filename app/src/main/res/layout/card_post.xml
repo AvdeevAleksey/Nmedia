@@ -89,7 +89,7 @@
         android:checkable="true"
         app:icon="@drawable/ic_like_selector"
         app:iconTint="@color/ic_like_tint_selector"
-        android:contentDescription="Like"
+        android:contentDescription="@string/content_like"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/barrier2"
         />
@@ -99,7 +99,7 @@
         style="@style/LikeBarImageButton"
         tools:text="@sample/posts.json/data/reposts"
         app:icon="@drawable/ic_baseline_share_24"
-        android:contentDescription="Share"
+        android:contentDescription="@string/content_share"
         app:layout_constraintBottom_toBottomOf="@+id/likeImageButton"
         app:layout_constraintStart_toEndOf="@id/likeImageButton"
         app:layout_constraintTop_toTopOf="@+id/likeImageButton"/>
@@ -109,7 +109,7 @@
         style="@style/LikeBarImageButton"
         tools:text="@sample/posts.json/data/views"
         app:icon="@drawable/ic_baseline_visibility_24"
-        android:contentDescription="Views"
+        android:contentDescription="@string/content_views"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/shareImageButton"
         app:layout_constraintBottom_toBottomOf="@id/shareImageButton"/>
