@@ -83,7 +83,7 @@ class MainActivity : AppCompatActivity() {
                 }
                 viewModel.changeContent(text.toString())
                 viewModel.savePost()
-
+                binding.cancelChangeImageButton.visibility = View.GONE
                 setText("")
                 clearFocus()
                 AndroidUtils.hideKeyboard(this)
