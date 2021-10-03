@@ -5,6 +5,7 @@
     <string name="content_like">Like</string>
     <string name="content_share">Share</string>
     <string name="content_views">Views</string>
+    <string name="avatar_image">Avatar</string>
     <string name="post_text">Post text</string>
     <string name="text_not_be_empty">Content can\'t be empty</string>
 </resources>
