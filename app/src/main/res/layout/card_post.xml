@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="16dp">
+    android:padding="8dp">
 
     <ImageView
         android:id="@+id/avatarImageView"
@@ -43,7 +43,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/avatarImageView"
         tools:text="@sample/posts.json/data/published"/>
 
-    <ImageView
+    <ImageButton
         android:id="@+id/postMenuImageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -82,80 +82,36 @@
         app:barrierDirection="bottom"
         app:constraint_referenced_ids="contentTextView" />
 
-    <ImageView
-        android:id="@+id/likeImageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="4dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        android:background="@android:color/transparent"
-        app:srcCompat="@drawable/ic_baseline_favorite_border_24"
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/likeImageButton"
+        style="@style/LikeBarImageButton"
+        tools:text="@sample/posts.json/data/likes"
+        android:checkable="true"
+        app:icon="@drawable/ic_like_selector"
+        app:iconTint="@color/ic_like_tint_selector"
+        android:contentDescription="Like"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/barrier2"/>
+        app:layout_constraintTop_toBottomOf="@id/barrier2"
+        />
 
-    <TextView
-        android:id="@+id/likeTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        app:layout_constraintStart_toEndOf="@id/likeImageView"
-        app:layout_constraintEnd_toStartOf="@id/repostsImageView"
-        app:layout_constraintTop_toTopOf="@id/likeImageView"
-        app:layout_constraintBottom_toBottomOf="@id/likeImageView"
-        tools:text="@sample/posts.json/data/likes" />
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/shareImageButton"
+        style="@style/LikeBarImageButton"
+        tools:text="@sample/posts.json/data/reposts"
+        app:icon="@drawable/ic_baseline_share_24"
+        android:contentDescription="Share"
+        app:layout_constraintBottom_toBottomOf="@+id/likeImageButton"
+        app:layout_constraintStart_toEndOf="@id/likeImageButton"
+        app:layout_constraintTop_toTopOf="@+id/likeImageButton"/>
 
-    <ImageView
-        android:id="@+id/repostsImageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="4dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        android:layout_marginStart="16dp"
-        android:background="@android:color/transparent"
-        app:srcCompat="@drawable/ic_baseline_share_24"
-        app:layout_constraintStart_toEndOf="@id/likeTextView"
-        app:layout_constraintTop_toBottomOf="@id/barrier2"/>
-
-    <TextView
-        android:id="@+id/repostsTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        app:layout_constraintStart_toEndOf="@id/repostsImageView"
-        app:layout_constraintTop_toTopOf="@id/likeImageView"
-        app:layout_constraintBottom_toBottomOf="@id/repostsImageView"
-        tools:text="@sample/posts.json/data/reposts" />
-
-    <ImageView
-        android:id="@+id/viewsImageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="4dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        android:layout_marginEnd="4dp"
-        android:background="@android:color/transparent"
-        app:srcCompat="@drawable/ic_baseline_visibility_24"
-        app:layout_constraintEnd_toStartOf="@id/viewsTextView"
-        app:layout_constraintTop_toTopOf="@id/repostsImageView"
-        app:layout_constraintBottom_toBottomOf="@id/repostsImageView"/>
-
-    <TextView
-        android:id="@+id/viewsTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/viewsImageButton"
+        style="@style/LikeBarImageButton"
+        tools:text="@sample/posts.json/data/views"
+        app:icon="@drawable/ic_baseline_visibility_24"
+        android:contentDescription="Views"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/viewsImageView"
-        app:layout_constraintBottom_toBottomOf="@id/viewsImageView"
-        tools:text="@sample/posts.json/data/views" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_marginTop="8dp"
-        android:layout_height="2dp"
-        android:background="@color/red"
-        app:layout_constraintTop_toBottomOf="@id/viewsImageView"/>
+        app:layout_constraintTop_toTopOf="@id/shareImageButton"
+        app:layout_constraintBottom_toBottomOf="@id/shareImageButton"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
