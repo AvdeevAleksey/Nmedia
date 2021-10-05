@@ -73,6 +73,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.saveImageButton.setOnClickListener {
             with(binding.content) {
+                binding.cancelChangeImageButton.visibility = View.GONE
                 if (text.isNullOrBlank()) {
                     Toast.makeText(
                         this@MainActivity,
@@ -91,4 +92,3 @@ class MainActivity : AppCompatActivity() {
         }
     }
 }
-
