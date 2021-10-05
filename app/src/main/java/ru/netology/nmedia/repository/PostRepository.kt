@@ -6,7 +6,7 @@ import ru.netology.nmedia.dto.Post
 interface PostRepository {
     fun get(): LiveData<List<Post>>
     fun likeById(id: Int)
-    fun repostById(id: Int)
+    fun shareById(id: Int)
     fun viewingById(id: Int)
     fun savePost(post: Post)
     fun removeById(id: Int)

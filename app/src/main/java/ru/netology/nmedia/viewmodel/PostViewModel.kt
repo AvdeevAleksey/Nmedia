@@ -13,7 +13,7 @@ private val empty = Post(
     author = "",
     published = Calendar.getInstance().time.toString(),
     likesCount = 0,
-    repostsCount = 0,
+    shareCount = 0,
     viewingCount = 0,
     likedByMe = false
 )
@@ -23,7 +23,7 @@ class PostViewModel : ViewModel() {
     val data = repository.get()
     val edited = MutableLiveData(empty)
     fun likeById(id: Int) = repository.likeById(id)
-    fun repostById(id: Int) = repository.repostById(id)
+    fun shareById(id: Int) = repository.shareById(id)
     fun viewingById(id: Int) = repository.viewingById(id)
     fun removeById(id: Int) = repository.removeById(id)
     fun savePost() {
@@ -34,7 +34,6 @@ class PostViewModel : ViewModel() {
     }
 
     fun editPost(post: Post) {
-
         edited.value = post
     }
 

@@ -52,7 +52,7 @@ class PostViewHolder(
             authorTextView.text = post.author
             publishedTextView.text = post.published
             contentTextView.text = post.content
-            shareImageButton.text = countMyClick(post.repostsCount)
+            shareImageButton.text = countMyClick(post.shareCount)
             viewsImageButton.text = countMyClick(post.viewingCount)
             likeImageButton.isChecked = post.likedByMe
             likeImageButton.text = countMyClick(post.likesCount)
