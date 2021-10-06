@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="liked">@android:color/holo_red_dark</color>
     <color name="not_enable">#42000000</color>
+    <color name="gray">#427A7A7A</color>
 </resources>

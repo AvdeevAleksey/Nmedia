@@ -89,24 +89,27 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/videoGroup"
         android:layout_width="match_parent"
-        android:layout_height="128dp"
-        android:background="@android:color/transparent"
+        android:layout_height="wrap_content"
+        android:background="@color/gray"
         app:layout_constraintTop_toBottomOf="@id/barrier2"
         app:layout_constraintBottom_toTopOf="@id/barrier3">
 
-        <WebView
+        <ImageView
             android:id="@+id/videoContent"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@android:color/transparent"
-
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             />
 
         <ImageButton
             android:id="@+id/playVideoButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="gone"
+            android:visibility="visible"
             android:background="@android:color/transparent"
             android:src="@drawable/ic_play_circle_48"
             app:layout_constraintTop_toTopOf="parent"

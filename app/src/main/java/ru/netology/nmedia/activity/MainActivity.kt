@@ -4,6 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.observe
 import ru.netology.nmedia.R
@@ -62,6 +63,13 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onPlayVideo(post: Post) {
+//                Intent(Intent.ACTION_VIEW, Uri.parse(post.videoInPost)).takeIf {
+//                    it.resolveActivity(packageManager) != null
+//                }?.also {
+//                    startActivity(it)
+//                } ?: run {
+//                    showMyMessage(R.string.no_app_to_play)
+//                }
                     val intent = Intent(Intent.ACTION_VIEW).apply {
                         data = Uri.parse(post.videoInPost)
                     }
@@ -69,20 +77,8 @@ class MainActivity : AppCompatActivity() {
                         startActivity(intent)
                     } else {
                     showMyMessage(R.string.no_app_to_play)
-                }
+                    }
                 viewModel.videoById(post.id)
-//                val intentPlayVideo = Intent(Intent.ACTION_VIEW, Uri.parse(post.videoInPost))
-//                    .setType("url")
-//                    .putExtra(Intent.EXTRA_TEXT,Uri.parse(post.videoInPost))
-//                    .let {
-//                        Intent.createChooser(it,null)
-//                    }
-//                if (intentPlayVideo.resolveActivity(packageManager) != null) {
-//                    startActivity(intentPlayVideo)
-//                } else {
-//                    showMyMessage(R.string.no_app_to_play)
-//                }
-
             }
         })
 

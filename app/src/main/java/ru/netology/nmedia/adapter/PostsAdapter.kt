@@ -4,6 +4,7 @@ import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.PopupMenu
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.DiffUtil
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import ru.netology.nmedia.R
 import ru.netology.nmedia.databinding.CardPostBinding
 import ru.netology.nmedia.dto.Post
+import java.lang.System.load
 
 interface OnInteractionListener {
     fun onLike(post: Post)
@@ -55,17 +57,17 @@ class PostViewHolder(
             authorTextView.text = post.author
             publishedTextView.text = post.published
             contentTextView.text = post.content
-            videoContent.loadUrl(post.videoInPost)
+            videoContent.setImageURI(Uri.parse(post.videoInPost))
             shareImageButton.text = countMyClick(post.shareCount)
             viewsImageButton.text = countMyClick(post.viewingCount)
             likeImageButton.isChecked = post.likedByMe
             likeImageButton.text = countMyClick(post.likesCount)
-            playVideoButton.visibility = if (!post.videoInPost.isNullOrBlank()) View.VISIBLE  else View.GONE
+            videoGroup.visibility = if (!post.videoInPost.isNullOrBlank()) View.VISIBLE  else View.GONE
 
             playVideoButton.setOnClickListener {
                 onInteractionListener.onPlayVideo(post)
             }
-            videoContent.setOnClickListener {
+            videoGroup.setOnClickListener {
                 onInteractionListener.onPlayVideo(post)
             }
             likeImageButton.setOnClickListener {
@@ -118,4 +120,8 @@ fun countMyClick(click:Int, t:Int = 1000): String {
         in click/(t*t)%10*(t*t)+t*100 until click/(t*t)%10*(t*t)+(t*t) -> "${click/(t*t)%10},${click/(t*100)-click/(t*t)%10*10}${dischargesReduction(click)}"
         else -> "${click/(t*t)}${dischargesReduction(click)}"
     }
+}
+
+fun ImageView.loadPreview(videoId: String) {
+    load("$videoId")
 }
