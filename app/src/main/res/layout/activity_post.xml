@@ -11,6 +11,7 @@
         android:id="@+id/editPostContent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_margin="16dp"
         android:gravity="start|top"
         android:hint="@string/post_text"
         android:background="@android:color/transparent"

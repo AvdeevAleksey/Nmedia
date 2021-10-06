@@ -8,6 +8,7 @@ data class Post(
         val author: String,
         val content: String,
         val published: String,
+        val videoInPost: String,
         val likesCount: Int,
         val shareCount: Int,
         val viewingCount: Int,
@@ -15,6 +16,7 @@ data class Post(
 ): Parcelable {
         constructor(parcel: Parcel) : this(
                 parcel.readInt(),
+                requireNotNull(parcel.readString()),
                 requireNotNull(parcel.readString()),
                 requireNotNull(parcel.readString()),
                 requireNotNull(parcel.readString()),
@@ -30,6 +32,7 @@ data class Post(
                 parcel.writeString(author)
                 parcel.writeString(content)
                 parcel.writeString(published)
+                parcel.writeString(videoInPost)
                 parcel.writeInt(likesCount)
                 parcel.writeInt(shareCount)
                 parcel.writeInt(viewingCount)

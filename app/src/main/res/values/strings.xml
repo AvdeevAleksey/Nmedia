@@ -9,4 +9,5 @@
     <string name="post_text">Post text</string>
     <string name="text_not_be_empty">Content can\'t be empty</string>
     <string name="no_app_to_share">There is no app to share</string>
+    <string name="no_app_to_play">No app to play video</string>
 </resources>

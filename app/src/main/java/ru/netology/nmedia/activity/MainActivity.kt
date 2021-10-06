@@ -1,6 +1,7 @@
 package ru.netology.nmedia.activity
 
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
@@ -58,6 +59,30 @@ class MainActivity : AppCompatActivity() {
 
             override fun onPostRemove(post: Post) {
                 viewModel.removeById(post.id)
+            }
+
+            override fun onPlayVideo(post: Post) {
+                    val intent = Intent(Intent.ACTION_VIEW).apply {
+                        data = Uri.parse(post.videoInPost)
+                    }
+                    if (intent.resolveActivity(packageManager) != null) {
+                        startActivity(intent)
+                    } else {
+                    showMyMessage(R.string.no_app_to_play)
+                }
+                viewModel.videoById(post.id)
+//                val intentPlayVideo = Intent(Intent.ACTION_VIEW, Uri.parse(post.videoInPost))
+//                    .setType("url")
+//                    .putExtra(Intent.EXTRA_TEXT,Uri.parse(post.videoInPost))
+//                    .let {
+//                        Intent.createChooser(it,null)
+//                    }
+//                if (intentPlayVideo.resolveActivity(packageManager) != null) {
+//                    startActivity(intentPlayVideo)
+//                } else {
+//                    showMyMessage(R.string.no_app_to_play)
+//                }
+
             }
         })
 

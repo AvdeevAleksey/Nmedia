@@ -10,4 +10,5 @@ interface PostRepository {
     fun viewingById(id: Int)
     fun savePost(post: Post)
     fun removeById(id: Int)
+    fun videoById(id: Int)
 }

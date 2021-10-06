@@ -78,12 +78,51 @@
         app:layout_constraintBottom_toTopOf="@id/barrier2"
         tools:text="@sample/posts.json/data/content"
         />
+
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/barrier2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:barrierDirection="bottom"
         app:constraint_referenced_ids="contentTextView" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/videoGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        app:layout_constraintTop_toBottomOf="@id/barrier2"
+        app:layout_constraintBottom_toTopOf="@id/barrier3">
+
+        <VideoView
+            android:id="@+id/videoContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            />
+
+        <ImageButton
+            android:id="@+id/playVideoButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_play_circle_48"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="videoGroup" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/likeImageButton"
@@ -94,7 +133,7 @@
         app:iconTint="@color/ic_like_tint_selector"
         android:contentDescription="@string/content_like"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/barrier2"
+        app:layout_constraintTop_toBottomOf="@id/barrier3"
         />
 
     <com.google.android.material.button.MaterialButton
