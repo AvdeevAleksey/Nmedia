@@ -55,7 +55,7 @@ class PostViewHolder(
             authorTextView.text = post.author
             publishedTextView.text = post.published
             contentTextView.text = post.content
-            videoContent.setVideoURI(Uri.parse(post.videoInPost))
+            videoContent.loadUrl(post.videoInPost)
             shareImageButton.text = countMyClick(post.shareCount)
             viewsImageButton.text = countMyClick(post.viewingCount)
             likeImageButton.isChecked = post.likedByMe
