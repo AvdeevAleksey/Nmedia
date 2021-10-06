@@ -4,13 +4,9 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
 import androidx.activity.viewModels
-import ru.netology.nmedia.R
-import ru.netology.nmedia.databinding.ActivityMainBinding
 import ru.netology.nmedia.databinding.ActivityPostBinding
 import ru.netology.nmedia.dto.Post
-import ru.netology.nmedia.utils.AndroidUtils
 import ru.netology.nmedia.utils.showMyMessage
 import ru.netology.nmedia.viewmodel.PostViewModel
 import java.util.*
@@ -26,29 +22,32 @@ class PostActivity : AppCompatActivity() {
         val binding = ActivityPostBinding.inflate(LayoutInflater.from(this))
         setContentView(binding.root)
 
-        val viewModel: PostViewModel by viewModels()
+        val post = intent.getParcelableExtra(POST_KEY) as? Post
 
-        binding.fabOk.setOnClickListener{
-            with(binding.editPostContent) {
+        with(binding.editPostContent) {
+            if (post != null && !post.content.isNullOrBlank()) {
+                text.append(post.content)
+            } else {
+                text.append("")
+            }
+        }
 
-                setText(intent?.let {
-                    it.getStringExtra("content")
-                })
+            val viewModel: PostViewModel by viewModels()
 
-                if (text.isNullOrBlank()) {
-                    showMyMessage(ru.netology.nmedia.R.string.text_not_be_empty)
-                    return@setOnClickListener
-                    setResult(RESULT_CANCELED)
-                } else {
-                    val intent = Intent()
-                        .putExtra(POST_KEY, text)
-                    viewModel.changeContent(text.toString())
-                    viewModel.savePost()
-                    setResult(RESULT_OK)
-                    clearFocus()
-                    AndroidUtils.hideKeyboard(this)
+            binding.fabOk.setOnClickListener {
+                with(binding.editPostContent) {
+
+                    if (text.isNullOrBlank()) {
+                        showMyMessage(ru.netology.nmedia.R.string.text_not_be_empty)
+                        return@setOnClickListener
+                        setResult(RESULT_CANCELED)
+                    } else {
+                        val intent = Intent()
+                            .putExtra(POST_KEY, post?.copy(content = text.toString()))
+                        setResult(RESULT_OK, intent)
+                    }
+                    finish()
                 }
             }
         }
     }
-}

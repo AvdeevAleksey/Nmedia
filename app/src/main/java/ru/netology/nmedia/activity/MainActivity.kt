@@ -51,12 +51,9 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onPostEdit(post: Post) {
-                val intent = Intent(Intent.ACTION_SEND)
-
-                    .putExtra("post", Bundle().apply {
-                        putString("content", post.content)
-                    })
-                startActivityForResult(intent,postRequestCode)
+                val intentPostEdit = Intent(this@MainActivity,PostActivity::class.java)
+                    intentPostEdit.putExtra("post", post)
+                startActivityForResult(intentPostEdit,postRequestCode)
             }
 
             override fun onPostRemove(post: Post) {
@@ -77,8 +74,12 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.fabAddPost.setOnClickListener {
-            val intent = Intent(this,PostActivity::class.java)
-            startActivityForResult(intent,postRequestCode)
+            val post: Post = viewModel.edited.value.let { post ->
+               if (post?.id == 0) post else return@setOnClickListener
+            }
+            val intentNewPost = Intent(this@MainActivity,PostActivity::class.java)
+            intentNewPost.putExtra("post", post)
+            startActivityForResult(intentNewPost,postRequestCode)
         }
     }
 
@@ -88,7 +89,9 @@ class MainActivity : AppCompatActivity() {
         if (requestCode == postRequestCode && resultCode == RESULT_OK && data != null) {
             val post = data.getParcelableExtra<Post>(PostActivity.POST_KEY) ?: return
 
+
             viewModel.editPost(post)
+            viewModel.changeContent(post.content)
             viewModel.savePost()
         }
     }
