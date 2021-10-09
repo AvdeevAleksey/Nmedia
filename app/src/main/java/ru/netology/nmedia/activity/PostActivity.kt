@@ -4,12 +4,9 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
-import androidx.activity.viewModels
 import ru.netology.nmedia.databinding.ActivityPostBinding
 import ru.netology.nmedia.dto.Post
 import ru.netology.nmedia.utils.showMyMessage
-import ru.netology.nmedia.viewmodel.PostViewModel
-import java.util.*
 
 class PostActivity : AppCompatActivity() {
 
@@ -31,8 +28,6 @@ class PostActivity : AppCompatActivity() {
                 text.append("")
             }
         }
-
-            val viewModel: PostViewModel by viewModels()
 
             binding.fabOk.setOnClickListener {
                 with(binding.editPostContent) {
