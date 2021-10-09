@@ -87,9 +87,4 @@ class PostRepositoryInMemoryImpl : PostRepository {
         val posts = data.value.orEmpty().toMutableList()
         data.value = posts.filter { it.id != id }
     }
-
-    override fun videoById(id: Int) {
-        val posts = data.value.orEmpty().toMutableList()
-        data.value = posts
-    }
 }

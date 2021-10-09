@@ -27,7 +27,6 @@ class PostViewModel : ViewModel() {
     fun shareById(id: Int) = repository.shareById(id)
     fun viewingById(id: Int) = repository.viewingById(id)
     fun removeById(id: Int) = repository.removeById(id)
-    fun videoById(id: Int) = repository.videoById(id)
     fun savePost() {
         edited.value?.let {
             repository.savePost(it)
