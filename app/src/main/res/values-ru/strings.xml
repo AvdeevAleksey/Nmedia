@@ -7,6 +7,8 @@
     <string name="content_views">Просмотры</string>
     <string name="avatar_image">Аватар</string>
     <string name="post_text">Текст поста</string>
+    <string name="editOptionPost">Изменить</string>
+    <string name="removeOptionPost">Удалить</string>
     <string name="text_not_be_empty">Пост не может быть пустым</string>
     <string name="no_app_to_share">Отсутствуют приложение</string>
     <string name="no_app_to_play">Отсутствуют приложение для воспроизведения</string>

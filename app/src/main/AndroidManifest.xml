@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Nmedia">
         <activity
-            android:name=".activity.PostActivity"
+            android:name=".activity.PostFragment"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.SEND"/>
@@ -18,7 +18,7 @@
                 <data android:mimeType="text/plain"/>
             </intent-filter>
         </activity>
-        <activity android:name=".activity.MainActivity">
+        <activity android:name=".activity.FeedFragment">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

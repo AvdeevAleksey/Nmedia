@@ -9,7 +9,7 @@ import ru.netology.nmedia.dto.Post
 import ru.netology.nmedia.utils.AndroidUtils
 import java.util.*
 
-class PostRepositoryInMemoryImpl(
+class PostRepositoryFile(
     context: Context
 ) : PostRepository {
 
@@ -24,6 +24,7 @@ class PostRepositoryInMemoryImpl(
         set(value) {
             field=value
             sync()
+            data.value = value
         }
 
     private var nId = posts.maxByOrNull {
@@ -42,13 +43,11 @@ class PostRepositoryInMemoryImpl(
                     published = Calendar.getInstance().time.toString()
                 )
             ) + posts
-            data.value = posts
             return
         }
         posts = posts.map {
             if (it.id != post.id) it else it.copy(content = post.content)
         }
-        data.value = posts
     }
 
     override fun getAll(): LiveData<List<Post>> = data
@@ -60,7 +59,6 @@ class PostRepositoryInMemoryImpl(
                 likesCount = if (it.likedByMe) it.likesCount - 1 else it.likesCount + 1
             )
         }
-        data.value = posts
     }
 
     override fun shareById(id: Int) {
@@ -69,7 +67,6 @@ class PostRepositoryInMemoryImpl(
                 shareCount = it.shareCount + 1
             )
         }
-        data.value = posts
     }
 
     override fun viewingById(id: Int) {
@@ -78,12 +75,10 @@ class PostRepositoryInMemoryImpl(
                 viewingCount = it.viewingCount + 1
             )
         }
-        data.value = posts
     }
 
     override fun removeById(id: Int) {
         posts = posts.filter { it.id != id }
-        data.value = posts
     }
 
     private fun sync() {

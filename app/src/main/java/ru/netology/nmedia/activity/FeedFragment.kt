@@ -13,7 +13,7 @@ import ru.netology.nmedia.dto.Post
 import ru.netology.nmedia.utils.showMyMessage
 import ru.netology.nmedia.viewmodel.PostViewModel
 
-class MainActivity : AppCompatActivity() {
+class FeedFragment : AppCompatActivity() {
 
     private val postRequestCode = 1
 
@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onPostEdit(post: Post) {
-                val intentPostEdit = Intent(this@MainActivity,PostActivity::class.java)
+                val intentPostEdit = Intent(this@FeedFragment,PostFragment::class.java)
                     intentPostEdit.putExtra("post", post)
                 startActivityForResult(intentPostEdit,postRequestCode)
             }
@@ -65,7 +65,7 @@ class MainActivity : AppCompatActivity() {
                     it.resolveActivity(packageManager) != null
                 }?.also {
                     startActivity(it)
-                } ?: run {this@MainActivity
+                } ?: run {this@FeedFragment
                     showMyMessage(R.string.no_app_to_play)
                 }
             }
@@ -87,7 +87,7 @@ class MainActivity : AppCompatActivity() {
             val post: Post = viewModel.edited.value.let { post ->
                if (post?.id == 0) post else return@setOnClickListener
             }
-            val intentNewPost = Intent(this@MainActivity,PostActivity::class.java)
+            val intentNewPost = Intent(this@FeedFragment,PostFragment::class.java)
             intentNewPost.putExtra("post", post)
             startActivityForResult(intentNewPost,postRequestCode)
         }
@@ -97,7 +97,7 @@ class MainActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == postRequestCode && resultCode == RESULT_OK && data != null) {
-            val post = data.getParcelableExtra<Post>(PostActivity.POST_KEY) ?: return
+            val post = data.getParcelableExtra<Post>(PostFragment.POST_KEY) ?: return
 
 
             viewModel.editPost(post)

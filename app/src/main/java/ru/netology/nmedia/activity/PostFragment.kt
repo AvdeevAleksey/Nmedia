@@ -8,7 +8,7 @@ import ru.netology.nmedia.databinding.ActivityPostBinding
 import ru.netology.nmedia.dto.Post
 import ru.netology.nmedia.utils.showMyMessage
 
-class PostActivity : AppCompatActivity() {
+class PostFragment : AppCompatActivity() {
 
     companion object {
         const val POST_KEY = "post"
