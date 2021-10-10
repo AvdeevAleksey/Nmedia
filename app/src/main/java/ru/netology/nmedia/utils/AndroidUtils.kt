@@ -1,16 +1,15 @@
 package ru.netology.nmedia.utils
 
 import android.content.Context
-import android.widget.Toast
+import android.view.View
+import android.view.inputmethod.InputMethodManager
 
 object AndroidUtils {
     const val POST_FILE = "posts.json"
-}
+    const val POST_KEY = "post"
 
-fun Context.showMyMessage(text: Int, length: Int = Toast.LENGTH_SHORT) {
-    Toast.makeText(
-        this,
-        getText(text),
-        length
-    ).show()
+    fun hideKeyboard(view: View) {
+        val imm = view.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(view.windowToken,0)
+    }
 }

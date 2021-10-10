@@ -10,6 +10,8 @@
     <string name="editOptionPost">Edit</string>
     <string name="removeOptionPost">Remove</string>
     <string name="text_not_be_empty">Content can\'t be empty</string>
+    <string name="chooser_share_post">Chooser share post</string>
+    <string name="play_video_app_chooser">Chooser video app</string>
     <string name="no_app_to_share">There is no app to share</string>
     <string name="no_app_to_play">No app to play video</string>
 </resources>
