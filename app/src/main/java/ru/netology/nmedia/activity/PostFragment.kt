@@ -25,11 +25,11 @@ class PostFragment : Fragment() {
         val binding = FragmentPostBinding.inflate(inflater, container, false)
         binding.editPostContent.requestFocus()
 
-        val post : Post = arguments?.getParcelable<Post>(POST_KEY) as Post
+        val post : Post? = arguments?.getParcelable<Post>(POST_KEY)
         arguments?.remove(POST_KEY)
 
         with(binding.editPostContent) {
-            if (post != null && !post.content.isNullOrBlank()) {
+            if (post != null && post.content.isNotBlank()) {
                 text.append(post.content)
             } else {
                 text.append("")

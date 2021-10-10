@@ -12,12 +12,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="16dp"
+        android:background="@android:color/transparent"
         android:gravity="start|top"
         android:hint="@string/post_text"
-        android:background="@android:color/transparent"
         android:inputType="textMultiLine"
-        tools:text="@sample/posts.json/data/content"
-        />
+        android:paddingBottom="?actionBarSize"
+        tools:text="@sample/posts.json/data/content" />
 
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bottomAppBar"
