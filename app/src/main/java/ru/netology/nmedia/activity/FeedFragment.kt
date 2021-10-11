@@ -66,30 +66,38 @@ class FeedFragment : Fragment() {
                     val playVideoIntent = Intent.createChooser(intent,getString(R.string.play_video_app_chooser))
                     startActivity(playVideoIntent)
                 }
+
+                override fun onPostOpen(post: Post) {
+                    findNavController().navigate(
+                        R.id.action_feedFragment_to_fragmentCardPost,
+                        bundleOf(POST_KEY to post)
+                    )
+                    viewModel.openingPostById(post.id)
+                }
             })
 
-            binding.rvPostRecyclerView.adapter = postsAdapter
+        binding.rvPostRecyclerView.adapter = postsAdapter
 
-            viewModel.data.observe(viewLifecycleOwner) { posts ->
-                postsAdapter.submitList(posts)
+        viewModel.data.observe(viewLifecycleOwner) { posts ->
+            postsAdapter.submitList(posts)
+        }
+
+        viewModel.edited.observe(viewLifecycleOwner) { post ->
+            if (post.id == 0) {
+                return@observe
             }
+        }
 
-            viewModel.edited.observe(viewLifecycleOwner) { post ->
-                if (post.id == 0) {
-                    return@observe
-                }
+        binding.fabAddPost.setOnClickListener {
+            val post: Post = viewModel.edited.value.let { post ->
+                if (post?.id == 0) post else return@setOnClickListener
             }
+            findNavController().navigate(
+                R.id.action_feedFragment_to_postFragment,
+                bundleOf(POST_KEY to post)
+            )
+        }
 
-            binding.fabAddPost.setOnClickListener {
-                val post: Post = viewModel.edited.value.let { post ->
-                    if (post?.id == 0) post else return@setOnClickListener
-                }
-                findNavController().navigate(
-                    R.id.action_feedFragment_to_postFragment,
-                    bundleOf(POST_KEY to post)
-                )
-            }
-
-            return binding.root
+        return binding.root
         }
     }

@@ -5,7 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import ru.netology.nmedia.dto.Post
 import ru.netology.nmedia.repository.PostRepository
-import ru.netology.nmedia.repository.PostRepositoryFile
+import ru.netology.nmedia.repository.PostRepositoryFileImpl
 import java.util.*
 
 private val empty = Post(
@@ -21,13 +21,14 @@ private val empty = Post(
 )
 
 class PostViewModel(application: Application) : AndroidViewModel(application) {
-    private val repository: PostRepository = PostRepositoryFile(application)
+    private val repository: PostRepository = PostRepositoryFileImpl(application)
     val data = repository.getAll()
     val edited = MutableLiveData(empty)
     fun likeById(id: Int) = repository.likeById(id)
     fun shareById(id: Int) = repository.shareById(id)
     fun viewingById(id: Int) = repository.viewingById(id)
     fun removeById(id: Int) = repository.removeById(id)
+    fun openingPostById(id: Int) = repository.openingPostById(id)
     fun savePost() {
         edited.value?.let {
             repository.savePost(it)
