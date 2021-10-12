@@ -9,7 +9,7 @@ import ru.netology.nmedia.dto.Post
 import ru.netology.nmedia.utils.AndroidUtils
 import java.util.*
 
-class PostRepositoryFileImpl(
+class PostRepositoryFile(
     context: Context
 ) : PostRepository {
 
@@ -79,10 +79,6 @@ class PostRepositoryFileImpl(
 
     override fun removeById(id: Int) {
         posts = posts.filter { it.id != id }
-    }
-
-    override fun openingPostById(id: Int) {
-        posts = posts
     }
 
     private fun sync() {

@@ -64,25 +64,8 @@ class PostViewHolder(
             videoGroup.isVisible = post.videoInPost.isNotBlank()
 
             cardPost.setOnClickListener {
-                this.cardPost.apply {
-                    when(it.id) {
-                        R.id.avatarImageView -> {
-                            onInteractionListener.onPostOpen(post)
-                        }
-                        R.id.authorTextView -> {
-                            onInteractionListener.onPostOpen(post)
-                        }
-                        R.id.publishedTextView -> {
-                            onInteractionListener.onPostOpen(post)
-                        }
-                        R.id.contentTextView -> {
-                            onInteractionListener.onPostOpen(post)
-                        }
-                    }
-                    onInteractionListener.onPostOpen(post)
-                }
+                onInteractionListener.onPostOpen(post)
             }
-
             playVideoButton.setOnClickListener {
                 onInteractionListener.onPlayVideo(post)
             }
@@ -120,7 +103,6 @@ class PostViewHolder(
         }
     }
 }
-
 
 fun dischargesReduction(click: Int, t: Int = 1000): String {
     return when (click) {

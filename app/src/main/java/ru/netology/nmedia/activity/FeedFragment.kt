@@ -72,7 +72,6 @@ class FeedFragment : Fragment() {
                         R.id.action_feedFragment_to_fragmentCardPost,
                         bundleOf(POST_KEY to post)
                     )
-                    viewModel.openingPostById(post.id)
                 }
             })
 
