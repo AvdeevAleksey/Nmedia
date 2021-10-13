@@ -3,11 +3,12 @@ package ru.netology.nmedia.db
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import ru.netology.nmedia.dao.PostDaoImpl.PostColumns.TABLE
 
 class DbHelper(
     context: Context,
-    DbVersion: Int,
     DbName: String,
+    DbVersion: Int,
     private val DDLs: Array<String>
 ) : SQLiteOpenHelper(context, DbName, null, DbVersion) {
     override fun onCreate(db: SQLiteDatabase?) {
@@ -17,7 +18,8 @@ class DbHelper(
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
-        TODO("Not yet implemented")
+        db?.execSQL("DROP TABLE IF EXISTS " + TABLE)
+        onCreate(db)
     }
 
     override fun onDowngrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
