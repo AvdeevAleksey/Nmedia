@@ -13,7 +13,19 @@ class PostDaoImpl(
     companion object {
         internal const val DATABASE_VERSION = 1
         internal const val DATABASE_NAME = "MyPostsSQLiteDatabase.db"
-        val DDL = PostColumns.ALL_COLUMNS
+        val DDL = """
+        CREATE TABLE ${PostColumns.TABLE} (
+            ${PostColumns.COLUMN_ID} INTEGER PRIMARY KEY AUTOINCREMENT,
+            ${PostColumns.COLUMN_AUTHOR} TEXT NOT NULL,
+            ${PostColumns.COLUMN_PUBLISHED} TEXT NOT NULL,
+            ${PostColumns.COLUMN_CONTENT} TEXT NOT NULL,
+            ${PostColumns.COLUMN_VIDEO_IN_POST} TEXT NOT NULL,
+            ${PostColumns.COLUMN_LIKE_COUNT} INTEGER NOT NULL DEFAULT 0,
+            ${PostColumns.COLUMN_SHARE_COUNT} INTEGER NOT NULL DEFAULT 0,
+            ${PostColumns.COLUMN_VIEWING_COUNT} INTEGER NOT NULL DEFAULT 0,
+            ${PostColumns.COLUMN_LIKED_BY_ME} BOOLEAN NOT NULL DEFAULT 0 
+        );
+        """.trimIndent()
     }
 
     object PostColumns {
@@ -26,7 +38,7 @@ class PostDaoImpl(
         const val COLUMN_LIKE_COUNT = "likesCount"
         const val COLUMN_SHARE_COUNT = "shareCount"
         const val COLUMN_VIEWING_COUNT = "viewingCount"
-        const val COLUMN_LIKE_BY_MY = "likedByMe"
+        const val COLUMN_LIKED_BY_ME = "likedByMe"
 
         val ALL_COLUMNS = arrayOf(
             COLUMN_ID,
@@ -37,7 +49,7 @@ class PostDaoImpl(
             COLUMN_LIKE_COUNT,
             COLUMN_SHARE_COUNT,
             COLUMN_VIEWING_COUNT,
-            COLUMN_LIKE_BY_MY
+            COLUMN_LIKED_BY_ME
         )
     }
 
@@ -133,7 +145,7 @@ class PostDaoImpl(
                 likesCount = getInt(getColumnIndexOrThrow(PostColumns.COLUMN_LIKE_COUNT)),
                 shareCount = getInt(getColumnIndexOrThrow(PostColumns.COLUMN_SHARE_COUNT)),
                 viewingCount = getInt(getColumnIndexOrThrow(PostColumns.COLUMN_VIEWING_COUNT)),
-                likedByMe = getInt(getColumnIndexOrThrow(PostColumns.COLUMN_LIKE_BY_MY)) != 0
+                likedByMe = getInt(getColumnIndexOrThrow(PostColumns.COLUMN_LIKED_BY_ME)) != 0
             )
         }
     }
