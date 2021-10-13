@@ -1,22 +1,19 @@
 package ru.netology.nmedia.dao
 
 import android.content.ContentValues
-import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
-import androidx.lifecycle.MutableLiveData
-import ru.netology.nmedia.db.DbHelper
 import ru.netology.nmedia.dto.Post
 import java.util.*
 
 class PostDaoImpl(
-    context: Context,
     private val db: SQLiteDatabase
 ) : PostDao {
 
     companion object {
-        internal val DATABASE_VERSION = 1
-        internal val DATABASE_NAME = "MyPostsSQliteDatabase.db"
+        internal const val DATABASE_VERSION = 1
+        internal const val DATABASE_NAME = "MyPostsSQLiteDatabase.db"
+        val DDL = PostColumns.ALL_COLUMNS
     }
 
     object PostColumns {
@@ -44,9 +41,8 @@ class PostDaoImpl(
         )
     }
 
-    private var posts = mutableListOf<Post>()
-
     override fun getAll(): List<Post> {
+        var posts = mutableListOf<Post>()
         db.query(
             PostColumns.TABLE,
             PostColumns.ALL_COLUMNS,
@@ -65,12 +61,12 @@ class PostDaoImpl(
 
     override fun likeById(id: Int) {
         db.execSQL(
-            """
-                UPDATE posts SET
+               """ 
+                   UPDATE posts SET
                         likesCount = likesCount + CASE WHEN likeByMe THEN -1 ELSE 1 END;
                         likeByMe = CASE WHEN likeByMe THEN 0 ELSE 1 END;
-                WHERE id=?;
-            """.trimIndent(), arrayOf(id)
+                   WHERE id=?;
+                """.trimIndent(), arrayOf(id)
         )
     }
 

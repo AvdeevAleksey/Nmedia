@@ -2,19 +2,16 @@ package ru.netology.nmedia.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import ru.netology.nmedia.dao.PostDaoImpl
+import ru.netology.nmedia.dao.PostDao
 import ru.netology.nmedia.dto.Post
 
 class PostRepositorySQLiteDaoImpl(
-    private val dao: PostDaoImpl
+    private val dao: PostDao
 ) : PostRepository {
 
-    private var posts = if (dao.getAll().isNotEmpty()) {
-        dao.getAll()
-    } else emptyList<Post>()
+    private var posts = dao.getAll()
         set(value) {
             field=value
-            sync()
             data.value = value
         }
     private val data = MutableLiveData(posts)
@@ -45,9 +42,4 @@ class PostRepositorySQLiteDaoImpl(
     override fun removeById(id: Int) {
         dao.removeById(id)
     }
-
-    private fun sync() {
-        dao.
-    }
-
 }
