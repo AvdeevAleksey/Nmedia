@@ -10,6 +10,8 @@ class PostDaoImpl(
     private val db: SQLiteDatabase
 ) : PostDao {
 
+//    val daoImpl = db.attachedDbs.replaceAll()
+
     companion object {
         internal const val DATABASE_VERSION = 1
         internal const val DATABASE_NAME = "MyPostsSQLiteDatabase.db"
@@ -75,8 +77,8 @@ class PostDaoImpl(
         db.execSQL(
                """ 
                    UPDATE posts SET
-                        likesCount = likesCount + CASE WHEN likeByMe THEN -1 ELSE 1 END;
-                        likeByMe = CASE WHEN likeByMe THEN 0 ELSE 1 END;
+                        likesCount = likesCount + CASE WHEN likedByMe THEN -1 ELSE 1 END;
+                        likedByMe = CASE WHEN likedByMe THEN 0 ELSE 1 END;
                    WHERE id=?;
                 """.trimIndent(), arrayOf(id)
         )
@@ -86,7 +88,7 @@ class PostDaoImpl(
         db.execSQL(
             """
                 UPDATE posts SET
-                        shareById = shareById + 1;
+                        shareCount = shareCount + 1;
                 WHERE id=?;
             """.trimIndent(), arrayOf(id)
         )
@@ -96,7 +98,7 @@ class PostDaoImpl(
         db.execSQL(
             """
                 UPDATE posts SET
-                        viewingById = viewingById + 1;
+                        viewingCount = viewingCount + 1;
                 WHERE id=?;
             """.trimIndent(), arrayOf(id)
         )
@@ -110,6 +112,7 @@ class PostDaoImpl(
             put(PostColumns.COLUMN_AUTHOR,"Me")
             put(PostColumns.COLUMN_CONTENT, post.content)
             put(PostColumns.COLUMN_PUBLISHED, Calendar.getInstance().time.toString())
+            put(PostColumns.COLUMN_VIDEO_IN_POST, "")
         }
         val id = db.replace(PostColumns.TABLE,null,values)
         db.query(
