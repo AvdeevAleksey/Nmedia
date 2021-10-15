@@ -36,7 +36,7 @@ class FeedFragment : Fragment() {
                     val intent = Intent().apply {
                         action = Intent.ACTION_SEND
                         putExtra(Intent.EXTRA_TEXT,post.content)
-                        type = "text/plane"
+                        type = "text/plain"
                     }
                     val shareIntent =
                             Intent.createChooser(intent,getString(R.string.chooser_share_post))
@@ -59,9 +59,7 @@ class FeedFragment : Fragment() {
                 override fun onPlayVideo(post: Post) {
                     val intent = Intent().apply {
                         Intent.ACTION_VIEW
-                        Uri.parse(post.videoInPost).takeIf {
-                            it != null
-                        }
+                        data = Uri.parse(post.videoInPost)
                     }
                     val playVideoIntent = Intent.createChooser(intent,getString(R.string.play_video_app_chooser))
                     startActivity(playVideoIntent)
@@ -96,7 +94,6 @@ class FeedFragment : Fragment() {
                 bundleOf(POST_KEY to post)
             )
         }
-
         return binding.root
-        }
     }
+}

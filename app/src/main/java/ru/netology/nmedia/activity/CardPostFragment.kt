@@ -111,12 +111,9 @@ class CardPostFragment : Fragment() {
     private fun playVideo(post: Post) {
         val intent = Intent().apply {
             Intent.ACTION_VIEW
-            Uri.parse(post.videoInPost).takeIf {
-                it != null
-            }
+            data = Uri.parse(post.videoInPost)
         }
-        val playVideoIntent =
-            Intent.createChooser(intent, getString(R.string.play_video_app_chooser))
+        val playVideoIntent = Intent.createChooser(intent, getString(R.string.play_video_app_chooser))
         startActivity(playVideoIntent)
     }
 }
