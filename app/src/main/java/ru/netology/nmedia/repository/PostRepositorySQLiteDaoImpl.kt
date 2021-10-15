@@ -20,41 +20,45 @@ class PostRepositorySQLiteDaoImpl(
     override fun getAll(): LiveData<List<Post>> = data
 
     override fun likeById(id: Int) {
-        data.value = posts.map {
+        dao.likeById(id)
+        posts = posts.map {
             if (it.id != id) it else it.copy(
                 likedByMe = !it.likedByMe,
                 likesCount = if (it.likedByMe) it.likesCount - 1 else it.likesCount + 1
             )
         }
+        data.value = posts
     }
 
     override fun shareById(id: Int) {
         dao.shareById(id)
-        data.value = posts.map {
+        posts = posts.map {
             if (it.id != id) it else it.copy(shareCount = it.shareCount + 1)
         }
+        data.value = posts
     }
 
     override fun viewingById(id: Int) {
         dao.viewingById(id)
-        data.value = posts.map {
+        posts = posts.map {
             if (it.id != id) it else it.copy(viewingCount = it.viewingCount + 1)
         }
+        data.value = posts
     }
 
     override fun savePost(post: Post) {
         val saved = dao.savePost(post)
-        data.value = if (post.id == 0) {
+        posts = if (post.id == 0) {
             listOf(saved) + posts
         } else posts.map {
             if (it.id != post.id) it else saved
         }
+        data.value = posts
     }
 
     override fun removeById(id: Int) {
-//    val daoImpl: PostDaoImpl = PostDaoImpl()
         dao.removeById(id)
-        data.value = posts.filter { it.id != id }
-//    daoImpl.removeById(id)
+        posts = posts.filter { it.id != id }
+        data.value = posts
     }
 }

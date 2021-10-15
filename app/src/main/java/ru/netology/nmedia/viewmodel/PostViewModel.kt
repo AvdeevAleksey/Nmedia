@@ -3,11 +3,9 @@ package ru.netology.nmedia.viewmodel
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import ru.netology.nmedia.dao.AppDb
-import ru.netology.nmedia.dao.PostDaoImpl
+import ru.netology.nmedia.db.AppDb
 import ru.netology.nmedia.dto.Post
 import ru.netology.nmedia.repository.PostRepository
-import ru.netology.nmedia.repository.PostRepositoryFile
 import ru.netology.nmedia.repository.PostRepositorySQLiteDaoImpl
 import java.util.*
 
