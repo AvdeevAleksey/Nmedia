@@ -106,6 +106,7 @@ class PostDaoImpl(
             put(PostColumns.COLUMN_AUTHOR,"Me")
             put(PostColumns.COLUMN_CONTENT, post.content)
             put(PostColumns.COLUMN_PUBLISHED, Calendar.getInstance().time.toString())
+            TODO("Delete this hardcode later")
             put(PostColumns.COLUMN_VIDEO_IN_POST, "https://youtu.be/WhWc3b3KhnY")
         }
         val id = db.replace(PostColumns.TABLE,null,values)
