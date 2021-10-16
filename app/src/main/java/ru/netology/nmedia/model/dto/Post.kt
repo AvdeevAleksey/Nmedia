@@ -4,10 +4,10 @@ import android.os.Parcel
 import android.os.Parcelable
 
 data class Post(
-        val id: Int,
+        val id: Long,
         val author: String,
-        val content: String,
         val published: String,
+        val content: String,
         val videoInPost: String,
         val likesCount: Int,
         val shareCount: Int,
@@ -15,7 +15,7 @@ data class Post(
         val likedByMe: Boolean = false
 ): Parcelable {
         constructor(parcel: Parcel) : this(
-                parcel.readInt(),
+                parcel.readLong(),
                 requireNotNull(parcel.readString()),
                 requireNotNull(parcel.readString()),
                 requireNotNull(parcel.readString()),
@@ -28,10 +28,10 @@ data class Post(
         }
 
         override fun writeToParcel(parcel: Parcel, flags: Int) {
-                parcel.writeInt(id)
+                parcel.writeLong(id)
                 parcel.writeString(author)
-                parcel.writeString(content)
                 parcel.writeString(published)
+                parcel.writeString(content)
                 parcel.writeString(videoInPost)
                 parcel.writeInt(likesCount)
                 parcel.writeInt(shareCount)

@@ -6,14 +6,14 @@ import androidx.lifecycle.MutableLiveData
 import ru.netology.nmedia.model.db.AppDb
 import ru.netology.nmedia.model.dto.Post
 import ru.netology.nmedia.repository.PostRepository
-import ru.netology.nmedia.repository.PostRepositorySQLiteDaoImpl
+import ru.netology.nmedia.repository.PostRepositoryRoomImpl
 import java.util.*
 
 private val empty = Post(
-    id = 0,
-    content = "",
-    author = "",
+    id = 0L,
+    author = "Me",
     published = Calendar.getInstance().time.toString(),
+    content = "",
     videoInPost = "",
     likesCount = 0,
     shareCount = 0,
@@ -22,15 +22,15 @@ private val empty = Post(
 )
 
 class PostViewModel(application: Application) : AndroidViewModel(application) {
-    private val repository: PostRepository = PostRepositorySQLiteDaoImpl(
-        AppDb.getInstance(application).postDao
+    private val repository: PostRepository = PostRepositoryRoomImpl(
+        AppDb.getInstance(application).postDao()
     )
     val data = repository.getAll()
     val edited = MutableLiveData(empty)
-    fun likeById(id: Int) = repository.likeById(id)
-    fun shareById(id: Int) = repository.shareById(id)
-    fun viewingById(id: Int) = repository.viewingById(id)
-    fun removeById(id: Int) = repository.removeById(id)
+    fun likeById(id: Long) = repository.likeById(id)
+    fun shareById(id: Long) = repository.shareById(id)
+    fun viewingById(id: Long) = repository.viewingById(id)
+    fun removeById(id: Long) = repository.removeById(id)
     fun savePost() {
         edited.value?.let {
             repository.savePost(it)

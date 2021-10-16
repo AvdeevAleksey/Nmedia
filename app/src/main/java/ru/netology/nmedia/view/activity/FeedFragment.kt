@@ -80,14 +80,14 @@ class FeedFragment : Fragment() {
         }
 
         viewModel.edited.observe(viewLifecycleOwner) { post ->
-            if (post.id == 0) {
+            if (post.id == 0L) {
                 return@observe
             }
         }
 
         binding.fabAddPost.setOnClickListener {
             val post: Post = viewModel.edited.value.let { post ->
-                if (post?.id == 0) post else return@setOnClickListener
+                if (post?.id == 0L) post else return@setOnClickListener
             }
             findNavController().navigate(
                 R.id.action_feedFragment_to_postFragment,

@@ -1,14 +1,16 @@
 package ru.netology.nmedia.model.db
 
 import android.content.Context
-import android.database.sqlite.SQLiteDatabase
+import androidx.room.Database
+import androidx.room.Room
+import androidx.room.RoomDatabase
+import androidx.room.migration.Migration
 import ru.netology.nmedia.model.dao.PostDao
-import ru.netology.nmedia.model.dao.PostDaoImpl
-import ru.netology.nmedia.model.dao.PostDaoImpl.Companion.DATABASE_NAME
-import ru.netology.nmedia.model.dao.PostDaoImpl.Companion.DATABASE_VERSION
+import ru.netology.nmedia.model.entity.PostEntity
 
-class AppDb private constructor(db: SQLiteDatabase) {
-    val postDao: PostDao = PostDaoImpl(db)
+@Database(entities = [PostEntity::class], version = 1)
+abstract class AppDb : RoomDatabase() {
+    abstract fun postDao(): PostDao
 
     companion object {
         @Volatile
@@ -16,17 +18,17 @@ class AppDb private constructor(db: SQLiteDatabase) {
 
         fun getInstance(context: Context): AppDb {
             return instance ?: synchronized(this) {
-                instance ?: AppDb(
-                    buildDatabase(context, arrayOf(PostDaoImpl.DDL))
-                ).also { instance = it}
+                instance ?: buildDatabase(context).also {
+                    instance = it
+                }
             }
         }
 
-        private fun buildDatabase(context: Context, DDLs: Array<String>) = DbHelper(
+        private fun buildDatabase(context: Context) = Room.databaseBuilder(
             context,
-            DATABASE_NAME,
-            DATABASE_VERSION,
-            DDLs,
-        ).writableDatabase
+            AppDb::class.java,
+            "MyPostsRoomDb.db"
+        ).allowMainThreadQueries()
+            .build()
     }
 }
