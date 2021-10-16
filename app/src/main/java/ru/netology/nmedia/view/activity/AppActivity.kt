@@ -1,4 +1,4 @@
-package ru.netology.nmedia.activity
+package ru.netology.nmedia.view.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import ru.netology.nmedia.R

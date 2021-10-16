@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import ru.netology.nmedia.dto.Post
+import ru.netology.nmedia.model.dto.Post
 import ru.netology.nmedia.utils.AndroidUtils
 import java.util.*
 

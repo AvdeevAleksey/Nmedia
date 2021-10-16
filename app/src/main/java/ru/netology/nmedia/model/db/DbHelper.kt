@@ -1,9 +1,9 @@
-package ru.netology.nmedia.db
+package ru.netology.nmedia.model.db
 
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import ru.netology.nmedia.dao.PostDaoImpl.PostColumns.TABLE
+import ru.netology.nmedia.model.dao.PostDaoImpl.PostColumns.TABLE
 
 class DbHelper(
     context: Context,

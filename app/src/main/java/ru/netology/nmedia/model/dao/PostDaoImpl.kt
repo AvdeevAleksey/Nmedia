@@ -1,9 +1,9 @@
-package ru.netology.nmedia.dao
+package ru.netology.nmedia.model.dao
 
 import android.content.ContentValues
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
-import ru.netology.nmedia.dto.Post
+import ru.netology.nmedia.model.dto.Post
 import java.util.*
 
 class PostDaoImpl(

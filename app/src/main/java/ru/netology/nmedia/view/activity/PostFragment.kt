@@ -1,4 +1,4 @@
-package ru.netology.nmedia.activity
+package ru.netology.nmedia.view.activity
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import ru.netology.nmedia.databinding.FragmentPostBinding
-import ru.netology.nmedia.dto.Post
+import ru.netology.nmedia.model.dto.Post
 import ru.netology.nmedia.utils.AndroidUtils
 import ru.netology.nmedia.utils.AndroidUtils.POST_KEY
 import ru.netology.nmedia.viewmodel.PostViewModel

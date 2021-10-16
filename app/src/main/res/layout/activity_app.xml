@@ -9,6 +9,6 @@
     android:layout_height="match_parent"
     app:navGraph="@navigation/nav_main"
     app:defaultNavHost="true"
-    tools:context=".activity.AppActivity">
+    tools:context=".view.activity.AppActivity">
 
 </fragment>

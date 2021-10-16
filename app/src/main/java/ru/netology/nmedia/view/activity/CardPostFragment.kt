@@ -1,4 +1,4 @@
-package ru.netology.nmedia.activity
+package ru.netology.nmedia.view.activity
 
 import android.content.Intent
 import android.net.Uri
@@ -8,17 +8,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
 import androidx.core.os.bundleOf
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.map
 import androidx.navigation.fragment.findNavController
 import ru.netology.nmedia.R
-import ru.netology.nmedia.adapter.OnInteractionListener
-import ru.netology.nmedia.adapter.PostsAdapter
-import ru.netology.nmedia.adapter.countMyClick
+import ru.netology.nmedia.view.view.adapter.countMyClick
 import ru.netology.nmedia.databinding.FragmentCardPostBinding
-import ru.netology.nmedia.dto.Post
+import ru.netology.nmedia.model.dto.Post
 import ru.netology.nmedia.utils.AndroidUtils
 import ru.netology.nmedia.viewmodel.PostViewModel
 
