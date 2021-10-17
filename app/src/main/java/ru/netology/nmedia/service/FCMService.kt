@@ -4,12 +4,14 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import android.os.Build
+import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.google.gson.Gson
 import ru.netology.nmedia.R
+import ru.netology.nmedia.service.Action.LIKE
 import kotlin.random.Random
 
 class FCMService : FirebaseMessagingService() {
@@ -35,14 +37,32 @@ class FCMService : FirebaseMessagingService() {
     override fun onMessageReceived(message: RemoteMessage) {
 
         message.data[action]?.let {
-            when (Action.valueOf(it)) {
-                Action.LIKE -> handleLike(gson.fromJson(message.data[content], Like::class.java))
+            when (it) {
+                 LIKE.action -> handleLike(gson.fromJson(message.data[content], Like::class.java))
+                 else -> facepalm(gson.fromJson(message.data[content], Facepalm::class.java))
             }
         }
     }
 
     override fun onNewToken(token: String) {
         println(token)
+    }
+
+    private fun facepalm(content: Facepalm) {
+        val notification = NotificationCompat.Builder(this, channelId)
+            .setSmallIcon(R.drawable.ic_notification)
+            .setContentTitle(
+                getString(
+                    R.string.invalid_incoming_data,
+                    content.userName,
+                    content.postAuthor,
+                )
+            )
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            .build()
+
+        NotificationManagerCompat.from(this)
+            .notify(Random.nextInt(100_000), notification)
     }
 
     private fun handleLike(content: Like) {
@@ -63,8 +83,15 @@ class FCMService : FirebaseMessagingService() {
     }
 }
 
-enum class Action {
-    LIKE,
+data class Facepalm(
+    val userId: Long,
+    val userName: String,
+    val postId: Long,
+    val postAuthor: String,
+)
+
+enum class Action(val action: String) {
+    LIKE("LIKE"),
 }
 
 data class Like(
