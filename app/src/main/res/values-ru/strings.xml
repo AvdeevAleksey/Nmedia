@@ -18,7 +18,9 @@
     <string name="notification_user_liked">%1$s поставил лайк посту %2$s</string>
     <string name="channel_remote_name">Уведомления с сервера</string>
     <string name="channel_remote_description">Уведомления с удалённого сервера</string>
-    <string name="invalid_incoming_data">%1$s не виноват, it-шники накосячили с данными %2$s</string>
+    <string name="invalid_incoming_data">%1$s не виноват, it-шники накосячили с данными</string>
     <string name="find_his_face">find his face</string>
     <string name="look_into_his_eyes">look into his eyes</string>
+    <string name="user_has_published_new_post">%1$s опубликовал новый пост:</string>
+    <string name="new_published_post_text">%1$s</string>
 </resources>

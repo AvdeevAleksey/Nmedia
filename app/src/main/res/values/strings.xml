@@ -15,10 +15,12 @@
     <string name="no_app_to_share">There is no app to share</string>
     <string name="no_app_to_play">No app to play video</string>
     <string name="google_play_unavailable">Google Api Unavailable</string>
-    <string name="notification_user_liked">User %1$s liked %2$s\'s post</string>
+    <string name="notification_user_liked">User %1$s liked User %2$s\'s post</string>
     <string name="channel_remote_name">Server notifications</string>
     <string name="channel_remote_description">Notifications from remote server</string>
-    <string name="invalid_incoming_data">User %1$s not to blame something went wrong %2$s\'s post</string>
+    <string name="invalid_incoming_data">User %1$s not to blame something went wrong</string>
     <string name="find_his_face">find his face</string>
     <string name="look_into_his_eyes">look into his eyes</string>
+    <string name="user_has_published_new_post">User %1$s has published a new post:</string>
+    <string name="new_published_post_text">%1$s</string>
 </resources>
